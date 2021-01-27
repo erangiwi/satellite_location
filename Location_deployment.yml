@@ -1,0 +1,41 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: satellite
+---  
+  apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: satellite
+  name: constellation-deploy
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: constellation-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: constellation-app
+    spec:
+      containers:
+      - image: erangi123/satellite-location:main
+        imagePullPolicy: Always
+        name: constellation-app
+        ports:
+        - containerPort: 8087
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: satellite
+  name: constellation-service
+spec:
+  type: LoadBalancer
+  ports:
+  - protocol: TCP
+    port: 8087
+    targetPort: 8087
+  selector:
+    app.kubernetes.io/name: constellation-app
