@@ -3,7 +3,7 @@ package satellite_location.satellite_location.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "location",catalog = "location")
+@Table(name = "location_detail",catalog = "location")
 public class Location {
 
     @Id
