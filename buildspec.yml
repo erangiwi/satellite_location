@@ -23,7 +23,7 @@ phases:
       - echo List directory
       - ls -la
       - echo Push the latest image to cluster
-      - kubectl config set-context --current --namespace
+      - kubectl config set-context --current --namespace==satellite
       - kubectl apply -f satelliteapp-deployment.yaml
       - kubectl apply -f satelliteapp-service.yaml
       #- ./script.sh
